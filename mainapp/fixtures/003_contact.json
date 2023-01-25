@@ -1,0 +1,11 @@
+[
+  {
+    "model": "mainapp.contact",
+    "pk": 1,
+    "fields": {
+      "address": "г.Арзамас, ул. Смотрителей, д. 45",
+      "phone": "+79991345676",
+      "email": "housetail@mail.ru"
+    }
+  }
+]

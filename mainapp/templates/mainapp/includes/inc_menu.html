@@ -1,0 +1,5 @@
+<div class="menu">
+    {% for type in types %}
+        <a href="{% url 'mainapp:animaloftype' type.pk %}">{{type.title}}</a>
+    {% endfor %}
+</div>

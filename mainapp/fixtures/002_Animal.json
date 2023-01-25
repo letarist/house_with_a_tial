@@ -1,0 +1,37 @@
+[
+  {
+    "model": "mainapp.animal",
+    "pk": 1,
+    "fields": {
+      "type": 1,
+      "name": "Арнольд",
+      "age": 4,
+      "avatar": "animal_account/arn.jpg",
+      "short_description": "Прекрасный, верный, дружелюбный пёс",
+      "description": "Найден брошенным на заправке"
+    }
+  },
+  {
+    "model": "mainapp.animal",
+    "pk": 2,
+    "fields": {
+      "type": 2,
+      "name": "Муся",
+      "age": 2,
+      "avatar": "animal_account/mus.jpg",
+      "short_description": "Ласковая активная кошечка",
+      "description": "Принесли беременную и отказались"
+    }
+  },
+  {
+    "model": "mainapp.animal",
+    "pk": 3,
+    "fields": {
+      "type": 1,
+      "name": "Миша",
+      "age": 12,
+      "avatar": "animal_account/misha.jpg",
+      "short_description": "Старый дружелюбный пес"
+    }
+  }
+]
