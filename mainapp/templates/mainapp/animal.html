@@ -1,0 +1,12 @@
+{% extends 'mainapp/base.html' %}
+
+
+{% block content %}
+    {% include 'mainapp/includes/inc_animal_type.html' %}
+    {% for animal in animal_of_type %}
+        {{animal.name}}
+        {{animal.age}}
+        {{animal.short_description}}
+        <img src="{{media_url}}{{animal.avatar}}">
+    {% endfor %}
+{% endblock %}

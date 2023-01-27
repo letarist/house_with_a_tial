@@ -1,0 +1,9 @@
+{% extends 'mainapp/base.html' %}
+
+{% block content %}
+<form action="{% url 'authapp:login'%}" method="post">
+    {% csrf_token %}
+    {{login_form.as_p}}
+    <input value="Войти" type="submit" class="active">
+</form>
+{% endblock content %}

@@ -1,0 +1,17 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+<link rel="stylesheet" href="{% static 'fonts/font-awesome/css/font-awesome.css' %}">
+{% block javascript %}
+{% endblock javascript %}
+
+{% block header %}
+{% endblock header %}
+{% block menu %}
+    {% include 'mainapp/includes/inc_menu.html' %}
+{% endblock menu %}
+{% block content %}
+{% endblock content %}
+
+{% block footer %}
+{% endblock footer %}
