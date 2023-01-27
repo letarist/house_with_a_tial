@@ -2,6 +2,7 @@
 
 
 {% block content %}
+    {% include 'mainapp/includes/inc_animal_type.html' %}
     {% for animal in animal_of_type %}
         {{animal.name}}
         {{animal.age}}

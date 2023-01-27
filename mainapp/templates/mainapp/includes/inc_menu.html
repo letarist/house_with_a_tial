@@ -1,5 +1,11 @@
 <div class="menu">
-    {% for type in types %}
-        <a href="{% url 'mainapp:animaloftype' type.pk %}">{{type.title}}</a>
-    {% endfor %}
+    <a href="{% url 'mainapp:typeanimal' %}">Животные</a>
+    {% if user.is_authenticated %}
+    <a href="{% url 'authapp:logout' %}">Выйти</a>
+    <a href="{% url 'authapp:change' %}">{{user.username}}</a>
+    {% else %}
+    <a href="{% url 'authapp:login' %}">Войти</a>
+    <a href="{% url 'authapp:register' %}">Регистрация</a>
+    {% endif %}
+        <a href="{% url 'mainapp:contact' %}">Контакты</a>
 </div>

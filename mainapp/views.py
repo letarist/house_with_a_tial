@@ -11,13 +11,16 @@ def index(request):
 
 
 def contact(request):
-    contact = Contact.objects.all()
-    context = {"title": "Контакты", "contact": contact}
+    contacts = Contact.objects.all()
+    context = {"title": "Контакты", "contacts": contacts}
     return render(request, 'mainapp/contact.html', context)
 
 
-def animal_of_types(request, pk):
+def animal_of_types(request, pk=None):
     types = TypeOfAnimal.objects.all()
-    animal_of_type = Animal.objects.filter(type=pk)
+    if pk:
+        animal_of_type = Animal.objects.filter(type=pk)
+    else:
+        animal_of_type = Animal.objects.all()
     context = {'types': types, 'animal_of_type': animal_of_type, 'media_url': settings.MEDIA_URL}
     return render(request, 'mainapp/animal.html', context)

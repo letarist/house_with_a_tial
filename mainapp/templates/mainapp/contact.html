@@ -1,5 +1,8 @@
 {% extends 'mainapp/base.html' %}
 
 {% block content %}
-    <p>{{}}</p>
+{% for contact in contacts %}
+    <p>{{contact.phone}}</p>
+    <p>{{contact.address}}</p>
+{% endfor %}
 {% endblock content %}

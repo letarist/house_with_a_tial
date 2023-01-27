@@ -4,7 +4,7 @@ from .views import index, contact, animal_of_types
 
 app_name = 'mainapp'
 urlpatterns = [
-    path('', index, name='index'),
+    path('', animal_of_types, name='typeanimal'),
     path('contact/', contact, name='contact'),
-    path('<int:pk>', animal_of_types, name='animaloftype')
+    path('<int:pk>/', animal_of_types, name='animaloftype')
 ]
