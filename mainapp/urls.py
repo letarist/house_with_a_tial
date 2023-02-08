@@ -1,10 +1,10 @@
 from django.urls import path
 
-from .views import index, contact, animal_of_types
+from .views import animal_of_types, contact, index
 
-app_name = 'mainapp'
+app_name = "mainapp"
 urlpatterns = [
-    path('', animal_of_types, name='typeanimal'),
-    path('contact/', contact, name='contact'),
-    path('<int:pk>/', animal_of_types, name='animaloftype')
+    path("", animal_of_types, name="typeanimal"),
+    path("contact/", contact, name="contact"),
+    path("<int:pk>/", animal_of_types, name="animaloftype"),
 ]
