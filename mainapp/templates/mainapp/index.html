@@ -5,6 +5,7 @@
         {{animal.name}}
         {{animal.age}}
         {{animal.short_description}}
+        <a href={% if user.is_authenticated %}"{% url 'basketapp:basket_add' animal.pk %}"{% else %}"{% url 'authapp:login' %}" {% endif %}>Забрать домой</a>
         <img src="{{media_url}}{{animal.avatar}}">
     {% endfor %}
 {% endblock %}

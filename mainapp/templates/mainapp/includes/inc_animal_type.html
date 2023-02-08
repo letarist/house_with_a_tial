@@ -1,5 +1,6 @@
 <div class="animal_type">
+    <a href="{% url 'mainapp:animaloftype' pk=0 %}"class={% if request.resolver_match.kwargs.pk == 0 %}"active"{% endif %}>Все</a>
     {% for type in types %}
-        <a href="{% url 'mainapp:animaloftype' type.pk %}">{{type.title}}</a>
+        <a href="{% url 'mainapp:animaloftype' type.pk %}"class={% if request.resolver_match.kwargs.pk == type.pk %}"active"{% endif %}>{{type.title}}</a>
     {% endfor %}
 </div>

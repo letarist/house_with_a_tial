@@ -3,9 +3,10 @@
     {% if user.is_authenticated %}
     <a href="{% url 'authapp:logout' %}">Выйти</a>
     <a href="{% url 'authapp:change' %}">{{user.username}}</a>
+    {{basket|length}}
     {% else %}
     <a href="{% url 'authapp:login' %}">Войти</a>
     <a href="{% url 'authapp:register' %}">Регистрация</a>
     {% endif %}
-        <a href="{% url 'mainapp:contact' %}">Контакты</a>
+    <a href="{% url 'mainapp:contact' %}">Контакты</a>
 </div>

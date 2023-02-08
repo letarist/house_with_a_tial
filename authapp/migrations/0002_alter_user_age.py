@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('authapp', '0001_initial'),
+        ("authapp", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='user',
-            name='age',
-            field=models.PositiveSmallIntegerField(blank=True, null=True, verbose_name='Возраст'),
+            model_name="user",
+            name="age",
+            field=models.PositiveSmallIntegerField(blank=True, null=True, verbose_name="Возраст"),
         ),
     ]
