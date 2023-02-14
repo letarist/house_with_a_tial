@@ -12,3 +12,9 @@ class Basket(models.Model):
 
     def __str__(self):
         return f'{self.user} - {self.animal}'
+
+    @property
+    def total_quantity(self):
+        _items = Basket.objects.filter(user=self.user)
+        full_quantity = sum(list(map(lambda x: x.quantity, _items)))
+        return full_quantity
