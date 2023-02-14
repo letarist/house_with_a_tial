@@ -6,6 +6,13 @@ from .models import Animal, Contact, TypeOfAnimal
 from basketapp.models import Basket
 
 
+def get_basket(user):
+    if user.is_authenticated:
+        return Basket.objects.filter(user=user)
+    else:
+        return []
+
+
 def rand_animal():
     hot_animal = Animal.objects.all()
     return sample(list(hot_animal), 1)[0]
@@ -59,8 +66,10 @@ def animal_of_types(request, pk=None):
 def person_animal(request, pk):
     animal = get_object_or_404(Animal, pk=pk)
     title = animal.name
+    basket = get_basket(request.user)
     context = {
         'animal': animal,
-        'title': title
+        'title': title,
+        'basket': basket
     }
     return render(request, 'mainapp/person_animal.html', context)

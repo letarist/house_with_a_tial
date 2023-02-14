@@ -6,7 +6,7 @@
     {% csrf_token %}
     {{login_form.as_p}}
     {% if next_param %}
-    <input type="hidden" name="next" value="{{ next_param }}">
+    <input type="hidden" name="next_param" value="{{ next_param }}">
     {% endif %}
     <input class="form-control" type="submit" value="войти">
 </form>
