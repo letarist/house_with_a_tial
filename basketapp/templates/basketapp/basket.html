@@ -1,0 +1,19 @@
+{% extends 'mainapp/base.html' %}
+{% block content %}
+{% for basket in basket_list %}
+<div class="basket>">
+    {{basket.user}}
+    {{basket.animal}}
+    <img class="avatar" src="{{media_url}}{{basket.animal.avatar}}">
+    {{basket.quantity}}
+    {{basket.add_time}}
+    {{basket.quantity}}
+    <a href="{% url 'basketapp:basket_delete' basket.pk%}">Удалить</a>
+</div>
+{% endfor %}
+{% if basket_list.0.total_quantity > 0 %}
+<p>В корзине {{basket_list.0.total_quantity}} животных</p>
+{% else %}
+<p>Корзина пуста</p>
+{%endif%}
+{% endblock content %}

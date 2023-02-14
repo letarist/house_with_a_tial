@@ -1,0 +1,8 @@
+{% extends 'mainapp/base.html' %}
+
+{% block content %}
+    {{animal.name}}
+    {{animal.age}}
+    {{animal.type}}
+    <a href="{% url 'basketapp:basket_add' animal.pk %}" >забрать домой</a>
+{% endblock content %}

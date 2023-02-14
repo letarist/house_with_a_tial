@@ -2,12 +2,14 @@
 
 
 {% block content %}
-    {% include 'mainapp/includes/inc_animal_type.html' %}
-    {% for animal in animal_of_type %}
-        {{animal.name}}
-        {{animal.age}}
-        {{animal.short_description}}
-        <a href={% if user.is_authenticated %}"{% url 'basketapp:basket_add' animal.pk %}"{% else %}"{% url 'authapp:login' %}" {% endif %}>Забрать домой</a>
-        <img src="{{media_url}}{{animal.avatar}}">
-    {% endfor %}
+{% include 'mainapp/includes/inc_animal_type.html' %}
+{% for animal in animal_of_type %}
+<div>
+    <a href="{% url 'mainapp:person_animal' animal.pk %}">{{animal.name}}</a>
+    {{animal.age}}
+    {{animal.short_description}}
+
+    <img class="avatar" src="{{media_url}}{{animal.avatar}}">
+</div>
+{% endfor %}
 {% endblock %}
