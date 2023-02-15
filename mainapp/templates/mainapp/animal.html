@@ -2,14 +2,20 @@
 
 
 {% block content %}
-{% include 'mainapp/includes/inc_animal_type.html' %}
+<div class="dop-menu">
+    {% include 'mainapp/includes/inc_animal_type.html' %}
+</div>
 {% for animal in animal_of_type %}
-<div>
-    <a href="{% url 'mainapp:person_animal' animal.pk %}">{{animal.name}}</a>
-    {{animal.age}}
-    {{animal.short_description}}
-
+<div class="card">
+    {{animal.name}}
     <img class="avatar" src="{{media_url}}{{animal.avatar}}">
+    {{animal.age}}
+    <br>
+    {{animal.short_description}}
+    <button class="home-animal">
+        <a href="{% url 'mainapp:person_animal' animal.pk %}">Посмотреть подробнее
+        </a>
+    </button>
 </div>
 {% endfor %}
 {% endblock %}

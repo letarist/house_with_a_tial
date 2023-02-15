@@ -8,13 +8,16 @@
 {% endblock javascript %}
 
 {% block header %}
-    <title>{{ title }}</title>
+<title>{{ title }}</title>
 {% endblock header %}
-{% block menu %}
-    {% include 'mainapp/includes/inc_menu.html' %}
-{% endblock menu %}
-{% block content %}
-{% endblock content %}
+<div class="container">
+    {% block menu %}
+        {% include 'mainapp/includes/inc_menu.html' %}
+    {% endblock menu %}
 
-{% block footer %}
-{% endblock footer %}
+    {% block content %}
+    {% endblock content %}
+
+    {% block footer %}
+    {% endblock footer %}
+</div>
