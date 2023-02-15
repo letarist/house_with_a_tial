@@ -10,6 +10,7 @@
     color: red;
 }
 
+
 .avatar {
     height: 100px;
     width: 100px;
@@ -102,4 +103,9 @@
     box-sizing: border-box;
     text-align: left;
     vertical-align: top;
+}
+
+.avatar{
+    height: 100px;
+    width: 100px;
 }

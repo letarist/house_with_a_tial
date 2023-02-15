@@ -5,11 +5,6 @@
     Горячее предложение
     {{rand_animal.type}}
     {{rand_animal.name}}
-    <img class="avatar" src="{{media_url}}{{animal.avatar}}">
-    {{rand_animal.age}}
-    <button class="home-animal">
-        <a href="{% url 'basketapp:basket_add' rand_animal.pk %}">Забрать домой</a>
-    </button>
 </div>
 {% for animal in get_same_animal_ %}
 <div class="card">
