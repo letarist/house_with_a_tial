@@ -5,16 +5,22 @@
     Горячее предложение
     {{rand_animal.type}}
     {{rand_animal.name}}
-    {{rand_animal.age}}
-    <a href="{% url 'basketapp:basket_add' rand_animal.pk %}">Забрать домой</a>
-</div>
-    {% for animal in get_same_animal_ %}
-<div>
-    {{animal.name}}
-    {{animal.age}}
-    {{animal.short_description}}
-    <a href={% if user.is_authenticated %}"{% url 'basketapp:basket_add' animal.pk %}"{% else %}"{% url 'authapp:login'%}" {% endif %}>Забрать домой</a>
     <img class="avatar" src="{{media_url}}{{animal.avatar}}">
+    {{rand_animal.age}}
+    <button class="home-animal">
+        <a href="{% url 'basketapp:basket_add' rand_animal.pk %}">Забрать домой</a>
+    </button>
+</div>
+{% for animal in get_same_animal_ %}
+<div class="card">
+    {{animal.name}}
+    <img class="avatar" src="{{media_url}}{{animal.avatar}}">
+    {{animal.age}} лет
+    <br>
+    {{animal.short_description}}
+    <button class="home-animal">
+        <a href="{% url 'basketapp:basket_add' animal.pk %}">Забрать домой</a>
+    </button>
 </div>
 {%endfor%}
 {% endblock %}

@@ -1,7 +1,105 @@
-.active{
+.container {
+    width: 100vh;
+    padding-right: 170px;
+    padding-left: 170px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.active {
     color: red;
 }
-.avatar{
+
+.avatar {
     height: 100px;
     width: 100px;
+}
+
+.menu {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    text-align: justify;
+}
+
+.menu:after {
+    position: relative;
+    display: inline-block;
+    height: auto;
+    box-sizing: border-box;
+    vertical-align: top;
+    content: '';
+}
+
+.menu > .inc_menu {
+    position: relative;
+    display: inline-block;
+    width: 18%;
+    box-sizing: border-box;
+    text-align: left;
+    vertical-align: top;
+}
+
+.card {
+    width: 225px;
+    min-height: 350px;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+    transition: 0.2s;
+    position: relative;
+}
+
+.same-animal {
+    width: 500px;
+    min-height: 350px;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 4px;
+    transition: 0.2s;
+    position: relative;
+    background: #FDBE33;
+}
+
+.home-animal {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: white;
+    text-decoration: none;
+    padding: .5em 2em;
+    outline: none;
+    border-width: 2px 0;
+    border-style: solid none;
+    border-color: #FDBE33 #000 #D77206;
+    border-radius: 6px;
+    background: linear-gradient(#F3AE0F, #E38916) #E38916;
+    transition: 0.2s;
+}
+
+.dop-menu {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    text-align: justify;
+}
+.dop-menu:after {
+    position: relative;
+    display: inline-block;
+    height: auto;
+    box-sizing: border-box;
+    vertical-align: top;
+    content: '';
+}
+.type-menu {
+    position: relative;
+    display: inline-block;
+    width: 18%;
+    box-sizing: border-box;
+    text-align: left;
+    vertical-align: top;
 }

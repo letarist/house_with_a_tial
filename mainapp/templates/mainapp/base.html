@@ -3,18 +3,21 @@
 <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 <link rel="stylesheet" href="{% static 'fonts/font-awesome/css/font-awesome.css' %}">
 {% block javascript %}
-    <script src="{% static 'js/jquery-3.6.3.js' %}"></script>
-    <script src="{% static 'js/basket.js' %}"></script>
+<script src="{% static 'js/jquery-3.6.3.js' %}"></script>
+<script src="{% static 'js/basket.js' %}"></script>
 {% endblock javascript %}
 
 {% block header %}
-    <title>{{ title }}</title>
+<title>{{ title }}</title>
 {% endblock header %}
-{% block menu %}
-    {% include 'mainapp/includes/inc_menu.html' %}
-{% endblock menu %}
-{% block content %}
-{% endblock content %}
+<div class="container">
+    {% block menu %}
+        {% include 'mainapp/includes/inc_menu.html' %}
+    {% endblock menu %}
 
-{% block footer %}
-{% endblock footer %}
+    {% block content %}
+    {% endblock content %}
+
+    {% block footer %}
+    {% endblock footer %}
+</div>

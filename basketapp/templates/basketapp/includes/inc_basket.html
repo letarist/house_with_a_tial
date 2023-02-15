@@ -8,7 +8,7 @@
     <input type="number" name="{{basket.pk}}" min="0" value="{{basket.quantity}}">
     <a href="{% url 'basketapp:basket_delete' basket.pk%}">Удалить</a>
 </div>
-    {% if basket_list.0.total_quantity %}
+    {% if basket_list.0.total_quantity > 0 %}
         <p>В корзине {{basket_list.0.total_quantity}} животных</p>
     {% else %}
         <p>Корзина пуста</p>
