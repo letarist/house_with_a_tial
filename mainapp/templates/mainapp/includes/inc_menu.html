@@ -15,6 +15,9 @@
     <div class="inc_menu">
         <a href="{%url 'basketapp:basket_show'%}">{{basket.0.total_quantity}}</a>
     </div>
+        {% if user.is_superuser %}
+            <a href="{% url 'adminapp:show_animal' pk=0 %}">Админка</a>
+        {% endif %}
     {% else %}
     <div class="inc_menu">
         <a href="{% url 'authapp:login' %}">Войти</a>

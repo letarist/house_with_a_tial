@@ -52,11 +52,8 @@ def animal_of_types(request, pk=None):
     if pk:
         animal_of_type = Animal.objects.filter(type=pk).order_by("name")
         title = TypeOfAnimal.objects.get(pk=pk)
-    elif pk == 0:
-        animal_of_type = Animal.objects.all().order_by('name')
-        title = 'Все'
     else:
-        animal_of_type = Animal.objects.all()
+        animal_of_type = Animal.objects.all().order_by('name')
         title = 'Все'
     context = {"types": types, "animal_of_type": animal_of_type, 'basket': basket, "media_url": settings.MEDIA_URL,
                'title': title}

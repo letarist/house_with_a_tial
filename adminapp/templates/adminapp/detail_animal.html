@@ -1,0 +1,24 @@
+{% extends 'adminapp/base.html' %}
+
+{% block menu %}
+    {% for link in animal_types %}
+        <a href="{% url 'adminapp:show_animal' link.pk %}">{{link.title}}</a>
+    {% endfor %}
+{% endblock menu %}
+{% block content %}
+{% if animal.is_active %}
+    {{animal.name}}
+    {{animal.type}}
+    {{animal.age}}
+{% endif %}
+<br>
+    <button class="home-animal">
+        <a href="{% url 'adminapp:edit_animal' animal.pk %}">Изменить</a>
+    </button>
+<br>
+    <button class="home-animal">
+        <a href="{% url 'adminapp:delete_animal' animal.pk %}">Удалить</a>
+    </button>
+<br>
+    <a href="{% url 'index' %}">На главную</a>
+{% endblock content %}

@@ -1,0 +1,30 @@
+{% load static %}
+
+{% block headers %}
+
+{% endblock headers %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+<link rel="stylesheet" href="{% static 'fonts/font-awesome/css/font-awesome.css' %}">
+{% endblock %}
+<title>{{ title }}</title>
+{% block javascript %}
+{% endblock javascript %}
+<div class="container">
+    {% block menu %}
+        {% include 'adminapp/includes/inc_admin_menu.html' %}
+    {% endblock menu %}
+    <br>
+    {% block content %}
+    {% endblock content %}
+    <br>
+    <a href="{% url 'adminapp:add_type' %}">Добавить категорию</a>
+    <br>
+    <a href="{% url 'adminapp:add_user' %}">Добваить пользователя</a>
+    <br>
+    <a href="{% url 'adminapp:add_animal'%}">Добавить животное</a>
+    <br>
+    {% block footer %}
+    {% endblock footer %}
+</div>

@@ -1,0 +1,9 @@
+{% extends 'adminapp/base.html' %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{create_type.as_p}}
+    <input type="submit" value="Создать категорию">
+</form>
+{% endblock content %}

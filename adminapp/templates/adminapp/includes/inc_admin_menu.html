@@ -1,0 +1,7 @@
+<a href="{% url 'adminapp:show_animal' 0 %}">Все</a>
+{% for link in animal_types %}
+    {% if link.is_active %}
+        <a href="{% url 'adminapp:show_animal' link.pk %}">{{link.title}}</a>
+    {% endif %}
+{% endfor %}
+    <a href="{% url 'adminapp:show_users' %}">Пользователи</a>

@@ -1,0 +1,12 @@
+{% extends 'adminapp/base.html' %}
+{% block menu %}
+    {% include 'adminapp/includes/inc_admin_menu.html' %}
+{% endblock menu %}
+{% block content %}
+    {% for animal in animals_of_type %}
+    <a href="{% url 'adminapp:detail_animal' animal.pk %}">{{animal.name}}</a>
+        {{animal.age}}
+        {{animal.short_description}}
+<br>
+    {% endfor %}
+{% endblock %}

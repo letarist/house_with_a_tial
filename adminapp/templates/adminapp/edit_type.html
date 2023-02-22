@@ -1,0 +1,10 @@
+{% extends 'adminapp/base.html' %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{edit_type.as_p}}
+    <input type="submit" value="Изменить">
+</form>
+
+{% endblock content %}
