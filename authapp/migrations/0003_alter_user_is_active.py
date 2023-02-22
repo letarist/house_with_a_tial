@@ -13,8 +13,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="user",
             name="is_active",
-            field=models.BooleanField(
-                default=True, verbose_name="Заблокировани/не заблокировани"
-            ),
+            field=models.BooleanField(default=True, verbose_name="Заблокировани/не заблокировани"),
         ),
     ]

@@ -1,9 +1,11 @@
-from django.conf import settings
-from django.shortcuts import render, get_object_or_404
 from random import sample
 
-from .models import Animal, Contact, TypeOfAnimal
+from django.conf import settings
+from django.shortcuts import get_object_or_404, render
+
 from basketapp.models import Basket
+
+from .models import Animal, Contact, TypeOfAnimal
 
 
 def get_basket(user):
@@ -32,9 +34,15 @@ def index(request):
     basket = []
     if request.user.is_authenticated:
         basket = Basket.objects.filter(user=request.user)
-    context = {"title": "Главная", "all_animals": all_animals, 'basket': basket, "types": types,
-               "media_url": settings.MEDIA_URL, 'get_same_animal_': get_same_animal_,
-               'rand_animal': rand_animal_}
+    context = {
+        "title": "Главная",
+        "all_animals": all_animals,
+        "basket": basket,
+        "types": types,
+        "media_url": settings.MEDIA_URL,
+        "get_same_animal_": get_same_animal_,
+        "rand_animal": rand_animal_,
+    }
     return render(request, "mainapp/index.html", context)
 
 
@@ -53,10 +61,15 @@ def animal_of_types(request, pk=None):
         animal_of_type = Animal.objects.filter(type=pk).order_by("name")
         title = TypeOfAnimal.objects.get(pk=pk)
     else:
-        animal_of_type = Animal.objects.all().order_by('name')
-        title = 'Все'
-    context = {"types": types, "animal_of_type": animal_of_type, 'basket': basket, "media_url": settings.MEDIA_URL,
-               'title': title}
+        animal_of_type = Animal.objects.all().order_by("name")
+        title = "Все"
+    context = {
+        "types": types,
+        "animal_of_type": animal_of_type,
+        "basket": basket,
+        "media_url": settings.MEDIA_URL,
+        "title": title,
+    }
     return render(request, "mainapp/animal.html", context)
 
 
@@ -64,9 +77,5 @@ def person_animal(request, pk):
     animal = get_object_or_404(Animal, pk=pk)
     title = animal.name
     basket = get_basket(request.user)
-    context = {
-        'animal': animal,
-        'title': title,
-        'basket': basket
-    }
-    return render(request, 'mainapp/person_animal.html', context)
+    context = {"animal": animal, "title": title, "basket": basket}
+    return render(request, "mainapp/person_animal.html", context)

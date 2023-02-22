@@ -1,7 +1,7 @@
 {% extends 'adminapp/base.html' %}
 
 {% block content %}
-<form method="post" action="{% url 'adminapp:add_user' %}">
+<form method="post" action="{% url 'adminapp:add_user' %}" enctype="multipart/form-data">
     {% csrf_token %}
     {{user_form.as_p}}
     <input type="submit" value="Создать">

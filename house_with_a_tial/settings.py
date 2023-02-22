@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     "mainapp",
     "authapp",
     "basketapp",
-    'adminapp',
+    "adminapp",
 ]
 
 MIDDLEWARE = [
@@ -127,4 +127,4 @@ AUTH_USER_MODEL = "authapp.User"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-LOGIN_URL = 'authapp:login'
+LOGIN_URL = "authapp:login"
