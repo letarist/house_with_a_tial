@@ -18,4 +18,11 @@
     </button>
 </div>
 {% endfor %}
+{% if animal_of_type.has_previous %}
+    <a href="{% url 'mainapp:animaloftype' type.pk animal_of_type.previous_page_number %}">Предыдущая</a>
+{% endif %}
+    <span> страница {{animaloftype.number}} из {{animaloftype.paginator.num_pages}} </span>
+{% if animal_of_type.has_next %}
+    <a href="{% url 'mainapp:animaloftype' type.pk animal_of_type.next_page_number  %}">Следущая</a>
+{% endif %}
 {% endblock %}

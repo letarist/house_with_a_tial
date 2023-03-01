@@ -2,6 +2,7 @@ from random import sample
 
 from django.conf import settings
 from django.shortcuts import get_object_or_404, render
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from basketapp.models import Basket
 
@@ -52,23 +53,29 @@ def contact(request):
     return render(request, "mainapp/contact.html", context)
 
 
-def animal_of_types(request, pk=None):
+def animal_of_types(request, pk=None, page=1):
     types = TypeOfAnimal.objects.all()
     basket = []
     if request.user.is_authenticated:
         basket = Basket.objects.filter(user=request.user)
     if pk:
         animal_of_type = Animal.objects.filter(type=pk).order_by("name")
-        title = TypeOfAnimal.objects.get(pk=pk)
+        type = TypeOfAnimal.objects.get(pk=pk)
     else:
         animal_of_type = Animal.objects.all().order_by("name")
-        title = "Все"
+        type = {'pk': 0, 'name': 'Все'}
+    paginator = Paginator(animal_of_type, 2)
+    try:
+        animal_paginator = paginator.page(page)
+    except PageNotAnInteger:
+        animal_paginator = paginator.page(1)
+    except EmptyPage:
+        animal_paginator = paginator.page(paginator.num_pages)
     context = {
-        "types": types,
-        "animal_of_type": animal_of_type,
+        "type": type,
+        "animal_of_type": animal_paginator,
         "basket": basket,
         "media_url": settings.MEDIA_URL,
-        "title": title,
     }
     return render(request, "mainapp/animal.html", context)
 

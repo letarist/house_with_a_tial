@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
+
 from authapp.forms import UserRegisterForm
 from authapp.models import User
 from mainapp.models import Animal, TypeOfAnimal
@@ -38,7 +39,7 @@ def edit_type(request, pk):
         edit_type = CreateType(request.POST, request.FILES, instance=type_animal)
         if edit_type.is_valid():
             edit_type.save()
-            return HttpResponseRedirect(reverse("adminapp:show_animal", args=[0]))
+            return HttpResponseRedirect(reverse("adminapp:show_animal", args=[pk]))
     edit_type = CreateType(instance=type_animal)
     context = {
         "edit_type": edit_type,
@@ -47,14 +48,16 @@ def edit_type(request, pk):
 
 
 @user_passes_test(lambda u: u.is_superuser)
-def add_animal(request):
+def add_animal(request, pk):
+    type_animal = get_object_or_404(TypeOfAnimal, pk=pk)
     if request.method == "POST":
         create_form = CreateAnimal(request.POST, request.FILES)
         if create_form.is_valid():
             create_form.save()
-            return HttpResponseRedirect(reverse("adminapp:show_animal", args=[0]))
-    create_form = CreateAnimal()
-    context = {"create_form": create_form}
+            return HttpResponseRedirect(reverse("adminapp:show_animal", args=[pk]))
+    else:
+        create_form = CreateAnimal(initial={'type': type_animal})
+    context = {"create_form": create_form, 'type_animal': type_animal}
     return render(request, "adminapp/create_animal.html", context)
 
 
@@ -85,7 +88,6 @@ def show_animal(request, pk):
     animal_types = TypeOfAnimal.objects.all()
     if pk != 0:
         animals_of_type = Animal.objects.filter(type=pk).order_by("name")
-
     else:
         animals_of_type = Animal.objects.all()
         context = {
