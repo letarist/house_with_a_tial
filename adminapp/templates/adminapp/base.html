@@ -19,12 +19,9 @@
     {% block content %}
     {% endblock content %}
     <br>
-    <a href="{% url 'adminapp:add_type' %}">Добавить категорию</a>
+    <a href="{% url 'adminapp:add_type'%}">Добавить категорию</a>
     <br>
     <a href="{% url 'adminapp:add_user' %}">Добваить пользователя</a>
-    <br>
-    <a href="{% url 'adminapp:add_animal'%}">Добавить животное</a>
-    <br>
     {% block footer %}
     {% endblock footer %}
 </div>

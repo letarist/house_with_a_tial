@@ -5,7 +5,7 @@ from django.db import models
 
 class TypeOfAnimal(models.Model):
     title = models.CharField(max_length=30, verbose_name="Вид животного")
-    is_active = models.BooleanField(verbose_name='Доступен', default=True)
+    is_active = models.BooleanField(verbose_name="Доступен", default=True)
 
     def __str__(self):
         return f"{self.title}"
@@ -19,7 +19,7 @@ class Animal(models.Model):
     short_description = models.CharField(max_length=70, verbose_name="Краткое описание")
     description = models.TextField(verbose_name="Описание", blank=True)
     date_entrance = models.DateTimeField(auto_created=True, verbose_name="Дата поступления", default=datetime.now())
-    is_active = models.BooleanField(verbose_name='Доступен', default=True)
+    is_active = models.BooleanField(verbose_name="Доступен", default=True)
     taken_home = models.DateTimeField(
         blank=True,
         null=True,

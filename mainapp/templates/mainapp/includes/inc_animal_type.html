@@ -1,8 +1,8 @@
 <div class="type-menu">
-    <a href="{% url 'mainapp:animaloftype' pk=0 %}"class={% if request.resolver_match.kwargs.pk == 0 %}"active"{% endif %}>Все</a>
+    <a href="{% url 'mainapp:animaloftype' pk=0 page=1 %}"class={% if request.resolver_match.kwargs.pk == 0 %}"active"{% endif %}>Все</a>
 </div>
     {% for type in types %}
 <div class="type-menu">
-        <a href="{% url 'mainapp:animaloftype' type.pk %}"class={% if request.resolver_match.kwargs.pk == type.pk %}"active"{% endif %}>{{type.title}}</a>
+        <a href="{% url 'mainapp:animaloftype' pk=type.pk page=1 %}"class={% if request.resolver_match.kwargs.pk == type.pk %}"active"{% endif %}>{{type.title}}</a>
     </div>
     {% endfor %}

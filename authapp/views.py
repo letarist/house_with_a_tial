@@ -1,23 +1,23 @@
 from django.conf import settings
 from django.contrib import auth
-from django.shortcuts import HttpResponseRedirect, render, reverse, redirect
+from django.shortcuts import HttpResponseRedirect, redirect, render, reverse
 
 from .forms import LoginForm, UserEditForm, UserRegisterForm
 
 
 def login(request):
     login_form = LoginForm(data=request.POST or None)
-    next_param = request.GET.get('next', '')
+    next_param = request.GET.get("next", "")
     if request.method == "POST" and login_form.is_valid():
         username = request.POST["username"]
         password = request.POST["password"]
         user = auth.authenticate(username=username, password=password)
         if user.is_active and user:
             auth.login(request, user)
-            if 'next_param' in request.POST.keys():
-                return HttpResponseRedirect(request.POST.get('next_param'))
+            if "next_param" in request.POST.keys():
+                return HttpResponseRedirect(request.POST.get("next_param"))
             return HttpResponseRedirect(reverse("index"))
-    context = {"login_form": login_form, 'next_param': next_param}
+    context = {"login_form": login_form, "next_param": next_param}
     return render(request, "authapp/login.html", context)
 
 
