@@ -6,10 +6,10 @@
     {% endfor %}
 {% endblock menu %}
 {% block content %}
-{% if animal.is_active %}
-    {{animal.name}}
-    {{animal.type}}
-    {{animal.age}}
+{% if object.is_active %}
+    {{object.name}}
+    {{object.type}}
+    {{object.age}}
 {% endif %}
 <br>
     <button class="home-animal">

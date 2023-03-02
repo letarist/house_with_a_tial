@@ -1,8 +1,12 @@
 from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
+from django.urls import reverse, reverse_lazy
+from django.views.generic.edit import UpdateView, CreateView, DeleteView
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse
-
 
 from authapp.forms import UserRegisterForm
 from authapp.models import User
@@ -11,25 +15,36 @@ from mainapp.models import Animal, TypeOfAnimal
 from .forms import CreateAnimal, CreateType, EditAnimal
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def add_type(request):
-    if request.method == "POST":
-        create_type = CreateType(request.POST, request.FILES)
-        if create_type.is_valid():
-            create_type.save()
-            return HttpResponseRedirect(reverse("adminapp:show_animal", args=[0]))
-    create_type = CreateType()
-    context = {"create_type": create_type}
-    return render(request, "adminapp/create_type.html", context)
+class CreateType(LoginRequiredMixin, CreateView):
+    model = TypeOfAnimal
+    template_name = 'adminapp/create_type.html'
+    fields = '__all__'
+    success_url = reverse_lazy('adminapp:show_animal', args=[0])
+
+    def test_func(self):
+        if self.request.user.is_superuser:
+            return self.request.user
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def delete_type(request, pk):
-    delete_type = get_object_or_404(TypeOfAnimal, pk=pk)
-    if delete_type.is_active:
-        delete_type.is_active = False
-        delete_type.save()
-    return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
+class DetailAnimal(LoginRequiredMixin, DetailView):
+    model = Animal
+    template_name = 'adminapp/detail_animal.html'
+
+
+class DeleteType(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
+    model = TypeOfAnimal
+    template_name = 'adminapp/delete_type.html'
+    success_url = reverse_lazy('adminapp:show_animal', args=[0])
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.is_active = False
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def test_func(self):
+        if self.request.user.is_superuser:
+            return self.request.user
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -74,13 +89,19 @@ def edit_animal(request, pk):
     return render(request, "adminapp/edit_animal.html", context)
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def delete_animal(request, pk):
-    animal = get_object_or_404(Animal, pk=pk)
-    if animal.is_active:
-        animal.is_active = False
-        animal.save()
-    return HttpResponseRedirect(reverse("adminapp:show_animal", args=[animal.type.pk]))
+class DeleteAnimal(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
+    model = Animal
+    template_name = 'adminapp/delete_animal.html'
+    success_url = reverse_lazy('adminapp:show_animal', args=[0])
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.is_active = False
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def test_func(self):
+        return self.request.user.is_superuser
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -105,17 +126,6 @@ def show_animal(request, pk):
 
 
 @user_passes_test(lambda u: u.is_superuser)
-def detail_animal(request, pk):
-    animal = get_object_or_404(Animal, pk=pk)
-    animal_types = TypeOfAnimal.objects.all()
-    context = {
-        "animal": animal,
-        "animal_types": animal_types,
-    }
-    return render(request, "adminapp/detail_animal.html", context)
-
-
-@user_passes_test(lambda u: u.is_superuser)
 def add_user(request):
     if request.method == "POST":
         user_form = UserRegisterForm(request.POST, request.FILES)
@@ -130,13 +140,19 @@ def add_user(request):
     return render(request, "adminapp/add_user.html", context)
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def delete_user(request, pk):
-    user = get_object_or_404(User, pk=pk)
-    if user.is_active:
-        user.is_active = False
-        user.save()
-        return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
+class DeleteUser(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
+    model = User
+    template_name = 'adminapp/delete_user.html'
+    success_url = reverse_lazy('adminapp:show_users')
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.is_active = False
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def test_func(self):
+        return self.request.user.is_superuser
 
 
 @user_passes_test(lambda u: u.is_superuser)
