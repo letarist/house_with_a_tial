@@ -2,13 +2,13 @@
 
 {% block content %}
     {% for user in users %}
-    {%if user.is_active%}
-        {{user.username}}
-        {{user.first_name}}
-        {{user.age}}
-        {{user.address}}
-        <a href="{% url 'adminapp:delete_user' user.pk %}">Удалить пользователя</a>
-{% endif %}
+        {%if user.is_active %}
+            {{user.username}}
+            {{user.first_name}}
+            {{user.age}}
+            {{user.address}}
+            <a href="{% url 'adminapp:delete_user' user.pk %}">Удалить пользователя</a>
+        {% endif %}
     <br>
     {% endfor %}
 <a href="{% url 'adminapp:add_user' %}">Добавить пользователя</a>
