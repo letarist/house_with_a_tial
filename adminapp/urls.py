@@ -8,6 +8,7 @@ from adminapp.views import (
     DeleteAnimal,
     DeleteType,
     DeleteUser,
+    add_user,
     edit_animal,
     edit_type,
     show_animal,
