@@ -9,3 +9,10 @@ class User(AbstractUser):
 
     def __str__(self):
         return f"{self.username}"
+
+    def delete(self, using=None, keep_parents=False):
+        if self.is_active:
+            self.is_active = False
+        else:
+            self.is_active = True
+        self.save()

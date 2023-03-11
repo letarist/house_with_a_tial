@@ -7,6 +7,7 @@
     {{rand_animal.name}}
 </div>
 {% for animal in get_same_animal_ %}
+{% if animal.is_active %}
 <div class="card">
     {{animal.name}}
     <img class="avatar" src="{{media_url}}{{animal.avatar}}">
@@ -17,5 +18,6 @@
         <a href="{% url 'basketapp:basket_add' animal.pk %}">Забрать домой</a>
     </button>
 </div>
+{% endif %}
 {%endfor%}
 {% endblock %}

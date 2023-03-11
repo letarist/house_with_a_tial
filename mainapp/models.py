@@ -10,6 +10,13 @@ class TypeOfAnimal(models.Model):
     def __str__(self):
         return f"{self.title}"
 
+    def delete(self, using=None, keep_parents=False):
+        if self.is_active:
+            self.is_active = False
+        else:
+            self.is_active = True
+        self.save()
+
 
 class Animal(models.Model):
     type = models.ForeignKey(TypeOfAnimal, on_delete=models.CASCADE, verbose_name="Вид животного")
@@ -28,6 +35,13 @@ class Animal(models.Model):
 
     def __str__(self):
         return f"{self.type} {self.name}"
+
+    def delete(self, using=None, keep_parents=False):
+        if self.is_active:
+            self.is_active = False
+        else:
+            self.is_active = True
+        self.save()
 
 
 class Contact(models.Model):
