@@ -1,22 +1,25 @@
 {% extends 'adminapp/base.html' %}
 
 {% block content %}
-    {% for animal in animals_of_type %}
-{% if animal.is_active %}
-        <a href="{% url 'adminapp:detail_animal' animal.pk %}">{{animal.name}}</a>
-        {{animal.type}}
-        {{animal.age}}
-{% endif %}
+    {% for animal in object_list %}
+        {% if animal.is_active %}
+            <a href="{% url 'adminapp:detail_animal' animal.pk %}">{{animal.name}}</a>
+            {{animal.type}}
+            {{animal.age}}
+            <br>
+        {% endif %}
     {% endfor %}
-<br>
-    <a href="{% url 'adminapp:delete_type' type_of_animal.pk %}">Удалить категорию</a>
-<br>
+{% if type_of_animal %}
     <br>
-        <a href="{% url 'adminapp:add_animal' type_of_animal.pk %}">Добавить животное</a>
+        <a href="{% url 'adminapp:delete_type' type_of_animal.pk %}">Удалить категорию</a>
     <br>
-<br>
-    <a href="{% url 'adminapp:edit_type' type_of_animal.pk %}">Изменить категорию</a>
-<br>
+        <br>
+            <a href="{% url 'adminapp:add_animal' type_of_animal.pk %}">Добавить животное</a>
+        <br>
+    <br>
+        <a href="{% url 'adminapp:edit_type' type_of_animal.pk %}">Изменить категорию</a>
+    <br>
+{% endif %}
 <br>
     <a href="{% url 'index' %}">На главную</a>
 <br>
