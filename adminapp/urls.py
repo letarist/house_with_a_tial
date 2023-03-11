@@ -1,6 +1,7 @@
 from django.urls import path
 
 from adminapp.views import (
+
     AddAnimal,
     CreateType,
     DetailAnimal,
