@@ -19,11 +19,13 @@ class CreateType(LoginRequiredMixin, CreateView):
     model = TypeOfAnimal
     template_name = 'adminapp/create_type.html'
     fields = '__all__'
-    success_url = reverse_lazy('adminapp:show_animal', args=[0])
 
     def test_func(self):
         if self.request.user.is_superuser:
             return self.request.user
+
+    def get_success_url(self):
+        return reverse('adminapp:show_animal', args=[self.object.pk])
 
 
 class DetailAnimal(LoginRequiredMixin, DetailView):
@@ -36,11 +38,6 @@ class DeleteType(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
     template_name = 'adminapp/delete_type.html'
     success_url = reverse_lazy('adminapp:show_animal', args=[0])
 
-    def delete(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        self.object.is_active = False
-        self.object.save()
-        return HttpResponseRedirect(self.get_success_url())
 
     def test_func(self):
         if self.request.user.is_superuser:
@@ -51,16 +48,17 @@ class EditType(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = TypeOfAnimal
     template_name = 'adminapp/edit_type.html'
     fields = '__all__'
-    success_url = reverse_lazy('adminapp:show_animal', args=[0])
 
     def test_func(self):
         return self.request.user.is_superuser
+
+    def get_success_url(self):
+        return reverse('adminapp:show_animals', args=[self.kwargs['pk']])
 
 
 class AddAnimal(UserPassesTestMixin, LoginRequiredMixin, CreateView):
     model = Animal
     template_name = 'adminapp/create_animal.html'
-    success_url = reverse_lazy('adminapp:show_animal', args=[0])
     fields = ('name', 'age', 'short_description', 'description', 'type')
 
     def get_initial(self):
@@ -70,30 +68,33 @@ class AddAnimal(UserPassesTestMixin, LoginRequiredMixin, CreateView):
         if self.request.user.is_superuser:
             return self.request.user
 
+    def get_success_url(self):
+        return reverse('adminapp:show_animal', args=[self.kwargs['pk']])
+
 
 class EditAnimal(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = Animal
     template_name = 'adminapp/edit_animal.html'
     fields = '__all__'
-    success_url = reverse_lazy('adminapp:show_animal', args=[0])
 
     def test_func(self):
         return self.request.user.is_superuser
 
+    def get_success_url(self):
+        animal_type = Animal.objects.get(pk=self.kwargs['pk'])
+        return reverse('adminapp:show_animal', args=[animal_type.type_id])
 
-class DeleteAnimal(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
+
+class AnimalDeleteView(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
     model = Animal
     template_name = 'adminapp/delete_animal.html'
-    success_url = reverse_lazy('adminapp:show_animal', args=[0])
-
-    def delete(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        self.object.is_active = False
-        self.object.save()
-        return HttpResponseRedirect(self.get_success_url())
 
     def test_func(self):
         return self.request.user.is_superuser
+
+    def get_success_url(self):
+        animal = Animal.objects.get(pk=self.kwargs['pk'])
+        return reverse('adminapp:show_animal', args=[animal.type_id])
 
 
 class ShowAnimal(UserPassesTestMixin, LoginRequiredMixin, ListView):
@@ -117,13 +118,14 @@ class AddUser(UserPassesTestMixin, LoginRequiredMixin, CreateView):
     model = User
     template_name = 'adminapp/add_user.html'
     fields = ('username', 'password', 'email', 'avatar')
-    success_url = reverse_lazy('adminapp:show_animal', args=[0])
+    success_url = reverse_lazy('adminapp:show_users')
 
     def test_func(self):
         return self.request.user.is_superuser
 
 
-class DeleteUser(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
+
+class UserDeleteView(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
     model = User
     template_name = 'adminapp/delete_user.html'
     success_url = reverse_lazy('adminapp:show_users')
