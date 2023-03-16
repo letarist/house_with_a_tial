@@ -2,16 +2,16 @@ from django.urls import path
 
 from adminapp.views import (
     AddAnimal,
-    CreateType,
-    DetailAnimal,
     AddUser,
     AnimalDeleteView,
+    CreateType,
     DeleteType,
-    UserDeleteView,
+    DetailAnimal,
     EditAnimal,
     EditType,
     ShowAnimal,
-    ShowUsers
+    ShowUsers,
+    UserDeleteView,
 )
 
 app_name = "adminapp"

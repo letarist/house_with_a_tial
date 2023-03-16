@@ -1,8 +1,8 @@
 from random import sample
 
 from django.conf import settings
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import get_object_or_404, render
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from basketapp.models import Basket
 
@@ -63,7 +63,7 @@ def animal_of_types(request, pk=None, page=1):
         type = TypeOfAnimal.objects.get(pk=pk)
     else:
         animal_of_type = Animal.objects.all().order_by("name")
-        type = {'pk': 0, 'name': 'Все'}
+        type = {"pk": 0, "name": "Все"}
     paginator = Paginator(animal_of_type, 2)
     try:
         animal_paginator = paginator.page(page)
