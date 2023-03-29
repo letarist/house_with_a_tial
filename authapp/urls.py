@@ -8,5 +8,5 @@ urlpatterns = [
     path("logout/", logout, name="logout"),
     path("register", register, name="register"),
     path("change/", change, name="change"),
-    path("verify/<email>/<activation_key>/", verify, name='verify')
+    path("verify/<email>/<activation_key>/", verify, name="verify"),
 ]

@@ -10,4 +10,6 @@
     {% endif %}
     <input class="form-control" type="submit" value="войти">
 </form>
+<a href="{% url 'social:begin' 'github' %}?next=/">Через гитхаб</a><br>
+<a href="{% url 'social:begin' 'vk-oauth2' %}?next=/">Через вк</a>
 {% endblock content %}

@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.contrib import auth
-from django.shortcuts import HttpResponseRedirect, redirect, render, reverse
 from django.core.mail import send_mail
+from django.shortcuts import HttpResponseRedirect, redirect, render, reverse
 
 from .forms import LoginForm, UserEditForm, UserRegisterForm
 from .models import User
@@ -34,7 +34,7 @@ def register(request):
         if register_form.is_valid():
             user = register_form.save()
             if create_mail(user):
-                return HttpResponseRedirect(reverse('authapp:login'))
+                return HttpResponseRedirect(reverse("authapp:login"))
             return HttpResponseRedirect(reverse("index"))
     else:
         register_form = UserRegisterForm()
@@ -59,14 +59,14 @@ def verify(requset, email, activation_key):
     if user.activate_key == activation_key and user.is_user_activation_key_expired():
         user.is_active = True
         user.save()
-        auth.login(requset, user)
-        return render(requset, 'authapp/verification.html')
+        auth.login(requset, user, backend="django.contrib.auth.backends.ModelBackend")
+        return render(requset, "authapp/verification.html")
     else:
-        return render(requset, 'authapp/verification.html')
+        return render(requset, "authapp/verification.html")
 
 
 def create_mail(user):
-    verify_link = reverse('authapp:verify', args=[user.email, user.activate_key])
-    title = f'Подтверждение учетной записи'
-    body_message = f'Привет, {user.username}! Ваша ссылка для активации аккаунта {settings.HOST}{verify_link}'
+    verify_link = reverse("authapp:verify", args=[user.email, user.activate_key])
+    title = f"Подтверждение учетной записи"
+    body_message = f"Привет, {user.username}! Ваша ссылка для активации аккаунта {settings.HOST}{verify_link}"
     return send_mail(title, body_message, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
