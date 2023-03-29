@@ -1,7 +1,9 @@
-from django.contrib.auth.forms import AuthenticationForm, UserChangeForm, UserCreationForm
 import hashlib
-from .models import User
 import random
+
+from django.contrib.auth.forms import AuthenticationForm, UserChangeForm, UserCreationForm
+
+from .models import User
 
 
 class LoginForm(AuthenticationForm):
@@ -28,8 +30,8 @@ class UserRegisterForm(UserCreationForm):
     def save(self, *args, **kwargs):
         user = super().save()
         user.is_active = False
-        salt = hashlib.sha1(str(random.random()).encode('utf-8')).hexdigest()[:6]
-        user.activate_key = hashlib.sha1((user.email + salt).encode('utf-8')).hexdigest()
+        salt = hashlib.sha1(str(random.random()).encode("utf-8")).hexdigest()[:6]
+        user.activate_key = hashlib.sha1((user.email + salt).encode("utf-8")).hexdigest()
         user.save()
         return user
 

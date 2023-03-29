@@ -23,6 +23,7 @@ from mainapp.views import index
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", index, name="index"),
+    path("", include("social_django.urls", namespace="social")),
     path("types/", include("mainapp.urls", namespace="mainapp")),
     path("auth/", include("authapp.urls", namespace="authapp")),
     path("basket/", include("basketapp.urls", namespace="basketapp")),
